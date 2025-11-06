@@ -1,0 +1,49 @@
+Drug Name,Drug Repurposing Category,Drug Category,Concentration,Outcome
+Amantadine,Symptomatic relief,Antidyskinetic,1 μM,No Difference
+Amantadine,Symptomatic relief,Antidyskinetic,5 μM,Rescue
+Amantadine,Symptomatic relief,Antidyskinetic,10 μM,Rescue
+Amantadine,Symptomatic relief,Antidyskinetic,15 μM,Rescue
+Amantadine,Symptomatic relief,Antidyskinetic,50 μM,Rescue
+Amantadine,Symptomatic relief,Antidyskinetic,100 μM,No Difference
+Ambroxol,Anti-inflammatory,Mucolytic,1 μM,No Difference
+Ambroxol,Anti-inflammatory,Mucolytic,25 μM,No Difference
+Ambroxol,Anti-inflammatory,Mucolytic,5 mM,Lethal
+Baclofen,Symptomatic relief,Skeletal muscle relaxant,15 mM,No Difference
+Cannabidiol,Symptomatic relief,Anticonvulsant,1μM,No Difference
+Cannabidiol,Symptomatic relief,Anticonvulsant,100 μM,Lethal
+Carnitine,Anti-inflammatory,Metabolic agent,1 μM,Rescue
+Carnitine,Anti-inflammatory,Metabolic agent,25 μM,Decreased NS
+Disulfiram,,Enzyme inhibitor,0.1 μM,Decreased NS
+Disulfiram,,Enzyme inhibitor,1 μM,Decreased NS
+Disulfiram,,Enzyme inhibitor,50 μM,Lethal
+Entacapone,,Enzyme inhibitor,1 μM,No Difference
+Entacapone,,Enzyme inhibitor,10 μM,No Difference
+Entacapone,,Enzyme inhibitor,25 μM,No Difference
+Entacapone,,Enzyme inhibitor,100 μM,Lethal
+Fluvoxamine,Symptomatic relief,SSRI,0.05 μM,Decreased NS
+Fluvoxamine,Symptomatic relief,SSRI,1 μM,Decreased NS
+Fluvoxamine,Symptomatic relief,SSRI,10 μM,Decreased NS
+Fluvoxamine,Symptomatic relief,SSRI,100 μM,Lethal
+Ketoconazole,Antimicrobial (Antifungal),Imidazole antifungal,1 μM,Rescue
+Ketoconazole,Antimicrobial (Antifungal),Imidazole antifungal,100 μM,Decreased NS
+Levodopa,"Symptomatic relief, Increase Dopamine Signaling",Dopamine precursor,1 μM,Decreased NS
+Levodopa,"Symptomatic relief, Increase Dopamine Signaling",Dopamine precursor,25 μM,No Difference
+Levodopa,"Symptomatic relief, Increase Dopamine Signaling",Dopamine precursor,100 μM,Rescue
+Levodopa,"Symptomatic relief, Increase Dopamine Signaling",Dopamine precursor,1 mM,Rescue
+Levodopa,"Symptomatic relief, Increase Dopamine Signaling",Dopamine precursor,10 mM,Decreased NS
+Levodopa,"Symptomatic relief, Increase Dopamine Signaling",Dopamine precursor,100 mM,Rescue
+Luteolin,Anti-inflammatory,"Flavones, natural product",1 μM,Decreased NS
+Luteolin,Anti-inflammatory,"Flavones, natural product",100 μM,No Difference
+Melatonin,Kinase inhibitor,Acetemide,1 μM,No Difference
+Melatonin,Kinase inhibitor,Acetemide,100 μM,Decreased NS
+Metformin,Anti-inflammatory,Biguanide,1 μM,No Difference
+Metformin,Anti-inflammatory,Biguanide,50 μM,Decreased NS
+Metformin,Anti-inflammatory,Biguanide,5 mM,Decreased NS
+Metformin,Anti-inflammatory,Biguanide,25 mM,Lethal
+Minocycline,Antimicrobial (Antibiotic),Tetracycline antibiotics,1 μM,No Difference
+Minocycline,Antimicrobial (Antibiotic),Tetracycline antibiotics,10 μM,No Difference
+Minocycline,Antimicrobial (Antibiotic),Tetracycline antibiotics,100 μM,No Difference
+Resveratrol,Anti-inflammatory,Polyphenolic phytoalexin,0.1 μM,No Difference
+Resveratrol,Anti-inflammatory,Polyphenolic phytoalexin,1 μM,No Difference
+Resveratrol,Anti-inflammatory,Polyphenolic phytoalexin,10 μM,No Difference
+Resveratrol,Anti-inflammatory,Polyphenolic phytoalexin,100 μM,No Difference

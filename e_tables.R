@@ -28,13 +28,6 @@ drug_screens_combined <- bind_rows(
       )  # Lethal in this column should override the outcome column
     ) %>%
     select(-dv_zantiks),  # Remove the temporary column
-  # Process 2024 data
-  drug_screens_2024 %>%
-    select(
-      drug_name = Drug,
-      concentration = Concentration,
-      outcome = `Phenotype Improved?`
-    )
 ) %>%
   # Remove rows with missing outcomes or concentrations
   filter(!is.na(outcome)) %>%
@@ -73,6 +66,33 @@ find_matching_drug <- function(test_name, library_names) {
   }
 }
 
+# match further specification to drug repurposing categories
+combine_drc_fs <- function(drc, fs) {
+  if (is.na(drc) || drc == "") return("")
+  if (is.na(fs) || fs == "") return(drc)
+
+  # Split both strings by comma
+  drc_parts <- str_split(drc, ",\\s*")[[1]]
+  fs_parts <- str_split(fs, ";\\s*")[[1]]
+
+  # Ensure fs_parts has same length as drc_parts by padding with empty strings
+  if (length(fs_parts) < length(drc_parts)) {
+    fs_parts <- c(fs_parts, rep("", length(drc_parts) - length(fs_parts)))
+  }
+
+  # Combine corresponding parts
+  combined_parts <- mapply(function(drc_part, fs_part) {
+    if (fs_part == "") {
+      return(drc_part)
+    } else {
+      return(paste0(drc_part, " (", fs_part, ")"))
+    }
+  }, drc_parts, fs_parts)
+
+  # Join back together with commas
+  return(paste(combined_parts, collapse = ", "))
+}
+
 get_repurposing_category <- function(drug_name, library_df) {
   # Special case for Carbidopa and Levodopa
   # if (drug_name %in% c("Carbidopa", "Levodopa")) {
@@ -80,8 +100,21 @@ get_repurposing_category <- function(drug_name, library_df) {
   # }
 
   # Otherwise look up in library
-  cat <- library_df$`Drug Repurposing Category`[library_df$`Generic Name` == drug_name][1]
-  return(cat)
+  # cat <- library_df$`Drug Repurposing Category`[library_df$`Generic Name` == drug_name][1]
+  # return(cat)
+  # Get the row index for the drug
+  idx <- which(library_df$`Generic Name` == drug_name)[1]
+
+  if (length(idx) == 0 || is.na(idx)) {
+    return("")
+  }
+
+  # Get both DRC and FS values
+  drc <- library_df$`Drug Repurposing Category`[idx]
+  fs <- library_df$`Further Specification`[idx]
+
+  # Combine them using the helper function
+  return(combine_drc_fs(drc, fs))
 }
 
 get_drug_category <- function(drug_name, library_df) {
@@ -149,6 +182,9 @@ final_table <- drug_screens_combined %>%
   # Ensure rows are grouped together
   arrange(`Drug Name`)
 
+# Save table as csv
+write_csv(final_table, "table.csv", na = "NA")
+
 # Create formatted GT table
 final_gt_table <- final_table %>%
   gt(
@@ -207,9 +243,9 @@ final_gt_table <- final_table %>%
       rows = Outcome == "Lethal"
     )
   ) %>%
-  cols_width(
-    `Drug Repurposing Category` ~ px(300)
-  ) %>%
+  # cols_width(
+  #   `Drug Repurposing Category` ~ px(300)
+  # ) %>%
   # opt_table_font(font = "Arial") %>%
   tab_options(
     table.border.top.style = "hidden",
