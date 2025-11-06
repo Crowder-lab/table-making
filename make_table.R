@@ -67,37 +67,37 @@ gt_table <- phenotypes %>%
     columns = -patient_variant,
     decimals = 1,
   ) %>%
-  tab_style(
-    style = list(
-      cell_fill(color = "grey75")
-    ),
-    locations = cells_column_spanners()
-  ) %>%
-  tab_style(
-    style = list(
-      cell_fill(color = "grey75")
-    ),
-    locations = cells_column_labels()
-  ) %>%
   # tab_style(
   #   style = list(
-  #     cell_fill(color = "grey95")
+  #     cell_fill(color = "grey75")
   #   ),
-  #   locations = cells_body(
-  #     rows = seq(1, nrow(phenotypes), 2)
-  #   )
+  #   locations = cells_column_spanners()
   # ) %>%
   # tab_style(
   #   style = list(
-  #     cell_fill(color = "grey90")
+  #     cell_fill(color = "grey75")
   #   ),
-  #   locations = cells_body(
-  #     columns = patient_variant
-  #   )
+  #   locations = cells_column_labels()
   # ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "grey95")
+    ),
+    locations = cells_body(
+      rows = seq(1, nrow(phenotypes), 2)
+    )
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "grey90")
+    ),
+    locations = cells_body(
+      columns = patient_variant
+    )
+  ) %>%
+  opt_table_outline() %>%
   tab_options(
-    table.border.top.style = "hidden",
-    row_group.as_column = TRUE
+    row_group.as_column = TRUE,
   ) %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
