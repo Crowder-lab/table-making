@@ -2,12 +2,14 @@ library(tidyverse)
 library(readxl)
 library(gt)
 library(gtExtras)
+library(stringr)
 
 # Read all sheets from Excel file
 drug_screens_2023 <- read_excel("all_drug_screens.xlsx", sheet = "2023 Drug Screens")
 drug_screens_2024 <- read_excel("all_drug_screens.xlsx", sheet = "2024 Drug Screens")
-drug_library <- read_excel("all_drug_screens.xlsx", sheet = "Drug Library (2024)", skip = 1) %>%
+drug_library_2024 <- read_excel("all_drug_screens.xlsx", sheet = "Drug Library (2024)", skip = 1) %>%
   mutate(`Generic Name` = str_remove_all(`Generic Name`, "\\s*\\([^)]*\\)"))
+non_drug_library <- read_excel("all_drug_screens.xlsx", sheet = "Non-library Drugs")
 
 # Clean and combine 2023 and 2024 drug screens
 drug_screens_combined <- bind_rows(
@@ -37,11 +39,16 @@ drug_screens_combined <- bind_rows(
   # Remove rows with missing outcomes or concentrations
   filter(!is.na(outcome)) %>%
   filter(!is.na(concentration)) %>%
-  filter(!drug_name %in% c("Daprodustat", "Dinaciclib", "Oxindole", "RH115", "TrkB agonist (BDNF like)")) %>%
+  filter(!drug_name %in% c("Carbidopa", "Daprodustat", "Dinaciclib", "Oxindole", "RH115", "TrkB agonist (BDNF like)")) %>%
   filter(!str_detect(drug_name, "\\+")) %>%
   mutate(concentration = str_replace_all(concentration, "u", "μ")) %>%
   mutate(outcome = str_replace_all(outcome, fixed("Rescue (WT and KO)"), "Non-specific Improvement")) %>%
   mutate(outcome = str_replace_all(outcome, "Non-Rescue", "No Difference"))
+
+drug_library <- bind_rows(
+  drug_library_2024,
+  non_drug_library
+)
 
 # Function to find best matching drug name in library
 find_matching_drug <- function(test_name, library_names) {
@@ -68,9 +75,9 @@ find_matching_drug <- function(test_name, library_names) {
 
 get_repurposing_category <- function(drug_name, library_df) {
   # Special case for Carbidopa and Levodopa
-  if (drug_name %in% c("Carbidopa", "Levodopa")) {
-    return("")
-  }
+  # if (drug_name %in% c("Carbidopa", "Levodopa")) {
+  #   return("")
+  # }
 
   # Otherwise look up in library
   cat <- library_df$`Drug Repurposing Category`[library_df$`Generic Name` == drug_name][1]
@@ -79,9 +86,9 @@ get_repurposing_category <- function(drug_name, library_df) {
 
 get_drug_category <- function(drug_name, library_df) {
   # Special case for Carbidopa and Levodopa
-  if (drug_name %in% c("Carbidopa", "Levodopa")) {
-    return("Decarboxylase inhibitor")
-  }
+  # if (drug_name %in% c("Carbidopa", "Levodopa")) {
+  #   return("Decarboxylase inhibitor")
+  # }
 
   # Otherwise look up in library
   reason <- library_df$`Drug category`[library_df$`Generic Name` == drug_name][1]
@@ -116,7 +123,7 @@ final_table <- drug_screens_combined %>%
   # Find lowest lethal concentration for each drug
   group_by(matched_name) %>%
   mutate(
-    min_lethal_conc = if(any(outcome == "Lethal")) {
+    min_lethal_conc = if (any(outcome == "Lethal")) {
       min(conc_numeric[outcome == "Lethal"])
     } else {
       Inf
