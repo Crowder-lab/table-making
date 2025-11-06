@@ -18,11 +18,11 @@ def rgb_to_lab_lightness(rgb):
     r = _gamma_expand(r)
     g = _gamma_expand(g)
     b = _gamma_expand(b)
-    
+
     x = 0.4124564 * r + 0.3575761 * g + 0.1804375 * b
     y = 0.2126729 * r + 0.7151522 * g + 0.0721750 * b
     z = 0.0193339 * r + 0.1191920 * g + 0.9503041 * b
-    
+
     # Convert Y to L* (lightness)
     y = y / 1.0  # Normalize to reference white
     if y > 0.008856:
@@ -51,7 +51,7 @@ def lab_lightness_to_rgb(l_value):
         y = math.pow((l_value + 16) / 116, 3)
     else:
         y = l_value / 903.3
-    
+
     # Since we're dealing with grayscale, R=G=B
     # We need to reverse the gamma correction
     gray = _gamma_compress(y)
@@ -60,37 +60,37 @@ def lab_lightness_to_rgb(l_value):
 def generate_grayscale_colors(darkest, brightest, n):
     """
     Generate n perceptually uniform grayscale colors between darkest and brightest.
-    
+
     Args:
         darkest (str): Hex color code for darkest gray
         brightest (str): Hex color code for brightest gray
         n (int): Number of colors to generate
-        
+
     Returns:
         list: List of hex color codes
     """
     if n < 2:
         raise ValueError("n must be at least 2")
-    
+
     # Convert hex colors to RGB
     dark_rgb = hex_to_rgb(darkest)
     bright_rgb = hex_to_rgb(brightest)
-    
+
     # Convert to L* values
     dark_l = rgb_to_lab_lightness(dark_rgb)
     bright_l = rgb_to_lab_lightness(bright_rgb)
-    
+
     # Generate evenly spaced L* values
     l_values = [dark_l + (bright_l - dark_l) * i / (n - 1) for i in range(n)]
-    
+
     # Convert back to RGB and then hex
     return [rgb_to_hex(lab_lightness_to_rgb(l)) for l in l_values]
 
 # Example usage
 if __name__ == "__main__":
-    colors = generate_grayscale_colors("#848484", "#E5E5E5", 5)
+    colors = generate_grayscale_colors("#999999", "#ECECEC", 4)
     print("Generated colors:", colors)
-    
+
     # Print a simple visualization
     for color in colors:
         print(f"Color: {color}")

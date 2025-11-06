@@ -236,7 +236,7 @@ final_gt_table <- final_table %>%
   ) %>%
   tab_style(
     style = list(
-      cell_fill(color = "#E5E5E5")
+      cell_fill(color = "#ECECEC")
     ),
     locations = cells_body(
       columns = "Outcome",
@@ -245,7 +245,7 @@ final_gt_table <- final_table %>%
   ) %>%
   tab_style(
     style = list(
-      cell_fill(color = "#C3C3C3")
+      cell_fill(color = "#CFCFCF")
     ),
     locations = cells_body(
       columns = "Outcome",
@@ -254,7 +254,7 @@ final_gt_table <- final_table %>%
   ) %>%
   tab_style(
     style = list(
-      cell_fill(color = "#A3A3A3")
+      cell_fill(color = "#B3B3B3")
     ),
     locations = cells_body(
       columns = "Outcome",
@@ -263,7 +263,7 @@ final_gt_table <- final_table %>%
   ) %>%
   tab_style(
     style = list(
-      cell_fill(color = "#848484")
+      cell_fill(color = "#999999")
     ),
     locations = cells_body(
       columns = "Outcome",
