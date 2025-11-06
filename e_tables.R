@@ -28,13 +28,31 @@ drug_screens_combined <- bind_rows(
       )  # Lethal in this column should override the outcome column
     ) %>%
     select(-dv_zantiks),  # Remove the temporary column
+  drug_screens_2024 %>%
+    select(
+      drug_name = Drug,
+      concentration = Concentration,
+      outcome = `Phenotype Improved?`,
+    ) %>%
+    filter(drug_name %in% c("Amantadine", "Roscovitine", "Sertraline HCL"))
 ) %>%
   # Remove rows with missing outcomes or concentrations
   filter(!is.na(outcome)) %>%
   filter(!is.na(concentration)) %>%
+  # Cammie didn't want these in there
   filter(!drug_name %in% c("Carbidopa", "Daprodustat", "Dinaciclib", "Oxindole", "RH115", "TrkB agonist (BDNF like)")) %>%
+  filter(!(drug_name == "Amantadine" & concentration %in% c("1 uM", "10 uM", "100 uM"))) %>%
+  filter(!(drug_name == "Ambroxol" & concentration == "1 uM")) %>%
+  filter(!(drug_name == "Disulfiram" & concentration == "0.1 uM")) %>%
+  filter(!(drug_name == "Entacapone" & concentration == "25 uM")) %>%
+  filter(!(drug_name == "Fluvoxamine" & concentration == "0.05 uM")) %>%
+  filter(!(drug_name == "Levodopa" & concentration %in% c("1 uM", "25 uM", "10 mM"))) %>%
+  filter(!(drug_name == "Resveratrol" & concentration == "0.1 uM")) %>%
+  # No combinations
   filter(!str_detect(drug_name, "\\+")) %>%
+  # Fix concentration notation
   mutate(concentration = str_replace_all(concentration, "u", "μ")) %>%
+  # Fix outcome names
   mutate(outcome = str_replace_all(outcome, fixed("Rescue (WT and KO)"), "Non-specific Improvement")) %>%
   mutate(outcome = str_replace_all(outcome, "Non-Rescue", "No Difference"))
 
