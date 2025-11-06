@@ -40,7 +40,7 @@ drug_screens_combined <- bind_rows(
   filter(!drug_name %in% c("Daprodustat", "Dinaciclib", "Oxindole", "RH115", "TrkB agonist (BDNF like)")) %>%
   filter(!str_detect(drug_name, "\\+")) %>%
   mutate(concentration = str_replace_all(concentration, "u", "μ")) %>%
-  mutate(outcome = str_replace_all(outcome, "Rescue (WT and KO)", "Non-specific Improvement")) %>%
+  mutate(outcome = str_replace_all(outcome, fixed("Rescue (WT and KO)"), "Non-specific Improvement")) %>%
   mutate(outcome = str_replace_all(outcome, "Non-Rescue", "No Difference"))
 
 # Function to find best matching drug name in library
