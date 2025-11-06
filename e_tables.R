@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 library(tidyverse)
 library(readxl)
 library(gt)
@@ -222,9 +224,15 @@ final_gt_table <- final_table %>%
   fmt_markdown(columns = everything()) %>%
   tab_style(
     style = list(
-      cell_text(weight = "bold")
+      cell_text(style = "italic")
     ),
     locations = cells_row_groups()
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(align = "center")
+    ),
+    locations = list(cells_body(), cells_column_labels())
   ) %>%
   tab_style(
     style = list(
@@ -263,7 +271,7 @@ final_gt_table <- final_table %>%
     )
   ) %>%
   # cols_width(
-  #   `Drug Repurposing Category` ~ px(300)
+  #   Outcome ~ px(120),
   # ) %>%
   # opt_table_font(font = "Arial") %>%
   tab_options(
