@@ -232,7 +232,7 @@ final_gt_table <- final_table %>%
     style = list(
       cell_text(align = "center")
     ),
-    locations = list(cells_body(), cells_column_labels())
+    locations = cells_body()
   ) %>%
   tab_style(
     style = list(
