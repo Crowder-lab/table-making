@@ -54,6 +54,7 @@ drug_screens_combined <- bind_rows(
   mutate(concentration = str_replace_all(concentration, "u", "μ")) %>%
   # Fix outcome names
   mutate(outcome = str_replace_all(outcome, fixed("Rescue (WT and KO)"), "Non-specific Improvement")) %>%
+  mutate(outcome = str_replace_all(outcome, fixed("Rescue (KO only)"), "Rescue")) %>%
   mutate(outcome = str_replace_all(outcome, "Non-Rescue", "No Difference"))
 
 drug_library <- bind_rows(
@@ -271,5 +272,7 @@ final_gt_table <- final_table %>%
   ) %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
-# Display the table
-final_gt_table
+# Save gt table in real formats
+gtsave(final_gt_table, "table.html")
+gtsave(final_gt_table, "table.png")
+gtsave(final_gt_table, "table.docx")
