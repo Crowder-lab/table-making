@@ -6,6 +6,8 @@ library(gt)
 library(gtExtras)
 library(stringr)
 
+Sys.setenv(CHROMOTE_CHROME = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser")
+
 # Read all sheets from Excel file
 drug_screens_2023 <- read_excel("all_drug_screens.xlsx", sheet = "2023 Drug Screens")
 drug_screens_2024 <- read_excel("all_drug_screens.xlsx", sheet = "2024 Drug Screens")
