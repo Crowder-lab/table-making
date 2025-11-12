@@ -31,6 +31,13 @@ for (genotype in c("MAPK8IP3", "ZC4H2", "SLC6A1")) {
     summarize(`Proteins of Interest` = paste0(`Proteins of Interest`, collapse = ", ")) %>%
     ungroup() %>%
 
+    # sort Targeted Symptoms
+    separate_longer_delim(`Targeted Symptoms`, delim = ", ") %>%
+    group_by(Name, `Drug Type`, `Therapeutic Category`, `Proteins of Interest`) %>%
+    arrange(`Targeted Symptoms`) %>%
+    summarize(`Targeted Symptoms` = paste0(`Targeted Symptoms`, collapse = ", ")) %>%
+    ungroup() %>%
+
     # sort Therapeutic Categories
     separate_longer_delim(`Therapeutic Category`, delim = ", ") %>%
     group_by(Name) %>%
@@ -110,6 +117,19 @@ for (genotype in c("MAPK8IP3", "ZC4H2", "SLC6A1")) {
       ),
       locations = cells_body()
     ) %>%
+
+    # special cases
+    { if (genotype == "ZC4H2") {
+        cols_width(
+          .,
+          `Therapeutic Category` ~ px(550)
+        )
+      } else {
+        .
+      }
+    } %>%
+
+    # universal cont.
     fmt_markdown(columns = everything()) %>%
     opt_table_outline() %>%
     sub_missing(columns = everything(), rows = everything(), missing_text = "")
