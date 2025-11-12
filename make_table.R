@@ -124,6 +124,11 @@ for (genotype in c("MAPK8IP3", "ZC4H2", "SLC6A1")) {
           .,
           `Therapeutic Category` ~ px(550)
         )
+      } else if (genotype =="MAPK8IP3") {
+        cols_width(
+          .,
+          `Therapeutic Category` ~ px(405)
+        )
       } else {
         .
       }
