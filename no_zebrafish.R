@@ -12,7 +12,8 @@ Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Goo
 
 # adjust the contents of the table
 df <- read_excel("./Cross species variant table.xlsx", sheet = "Sheet1") %>%
-  rename(blank = `...1`)
+  rename(blank = `...1`) %>%
+  select(-Zebrafish)
 
 gt_table <- df %>%
   # start using the gt package to style the table
@@ -20,9 +21,8 @@ gt_table <- df %>%
   # make column labels bold and add emojis
   cols_label(
     blank = "",
-    Human = md("**Human** 👩‍🔬"),
-    Mouse = md("**Mouse** 🐭"),
-    Zebrafish = md("**Zebrafish** 🐠")
+    Human = md("**Human**"),
+    Mouse = md("**Mouse**"),
   ) %>%
   # center the text of the column labels
   tab_style(
@@ -68,5 +68,5 @@ gt_table <- df %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
 for (extension in c("html", "png", "docx")) {
-  gtsave(gt_table, paste0("Cross species variants.", extension))
+  gtsave(gt_table, paste0("No zebrafish.", extension))
 }
