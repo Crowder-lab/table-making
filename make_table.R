@@ -11,18 +11,45 @@ library(gtExtras)
 Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 
 # adjust the contents of the table
-df <- read_excel("./Cross species variant table.xlsx", sheet = "Sheet1") %>%
-  rename(blank = `...1`)
+drugs <- c(
+  "Acamprosate",
+  "Azelaic acid",
+  "Buspirone",
+  "Escitalopram",
+  "Fluvoxamine",
+  "Gabapentin",
+  "Pyridoxine",
+  "Sertraline",
+  "Triamcinolone",
+  "Dextromethorphan",
+  "Clemastine",
+  "Pregabalin",
+  "Desflurane",
+  "Nalbuphine",
+  "Pyridostigmine"
+)
+df <- read_csv("./SLC6A1 Drug Data Story - Genes Only.csv") %>%
+  select(c(`DrugBank:Main Name`, `Score`, `Molecular Mechanism`)) %>%
+  filter(`DrugBank:Main Name` %in% drugs) %>%
+  mutate(
+    `Molecular Mechanism` = case_when(
+      str_count(`Molecular Mechanism`, fixed(",")) > 0 ~ "↓ GABA A receptor, ↑ GAT1",
+      str_count(`Molecular Mechanism`, fixed("GABA A")) > 0 ~ "↓ GABA A receptor",
+      str_count(`Molecular Mechanism`, fixed("GABA B")) > 0 ~ "↓ GABA B receptor",
+      str_count(`Molecular Mechanism`, fixed("GAT1")) > 0 ~ "↑ GAT1",
+      TRUE ~ `Molecular Mechanism`
+    )
+  ) %>%
+  arrange(desc(Score), `DrugBank:Main Name`)
 
 gt_table <- df %>%
   # start using the gt package to style the table
   gt() %>%
   # make column labels bold and add emojis
   cols_label(
-    blank = "",
-    Human = md("**Human** 👩‍🔬"),
-    Mouse = md("**Mouse** 🐭"),
-    Zebrafish = md("**Zebrafish** 🐠")
+    `DrugBank:Main Name` = md("**Drug**"),
+    `Score` = md("**Score**"),
+    `Molecular Mechanism` = md("**Molecular Hypothesis**")
   ) %>%
   # center the text of the column labels
   tab_style(
@@ -32,12 +59,11 @@ gt_table <- df %>%
     locations = cells_column_labels()
   ) %>%
   # bold the left-most column
-  # blank is the name of that column
   tab_style(
     style = list(
       cell_text(weight = "bold")
     ),
-    locations = cells_body(columns = blank)
+    locations = cells_body(columns = `DrugBank:Main Name`)
   ) %>%
   # set every other body row to be light grey
   tab_style(
@@ -55,7 +81,7 @@ gt_table <- df %>%
     style = list(
       cell_fill(color = "grey90")
     ),
-    locations = cells_body(columns = blank)
+    locations = cells_body(columns = `DrugBank:Main Name`)
   ) %>%
   tab_style(
     style = list(
@@ -68,5 +94,5 @@ gt_table <- df %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
 for (extension in c("html", "png", "docx")) {
-  gtsave(gt_table, paste0("Cross species variants.", extension))
+  gtsave(gt_table, paste0("SLC6A1 Grant.", extension))
 }
