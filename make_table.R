@@ -8,39 +8,56 @@ library(gtExtras)
 # This is needed to output a .png photo file
 # Replace inside the " " with the path to Google Chrome
 # (or another chromium-based browser)
-Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+# Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 
 # adjust the contents of the table
 drugs <- c(
   "Acamprosate",
   "Azelaic acid",
+  "Betamethasone",
   "Buspirone",
+  "Clemastine",
+  "Desflurane",
+  "Dextromethorphan",
   "Escitalopram",
   "Fluvoxamine",
   "Gabapentin",
+  "Lidocaine",
+  "Lovastatin",
+  "Nalbuphine",
+  "Pregabalin",
+  "Pyridostigmine",
   "Pyridoxine",
   "Sertraline",
-  "Triamcinolone",
-  "Dextromethorphan",
-  "Clemastine",
-  "Pregabalin",
-  "Desflurane",
-  "Nalbuphine",
-  "Pyridostigmine"
+  "Triamcinolone"
 )
 df <- read_csv("./SLC6A1 Drug Data Story - Genes Only.csv") %>%
-  select(c(`DrugBank:Main Name`, `Score`, `Molecular Mechanism`)) %>%
+  select(c(`DrugBank:Main Name`, `Score`, `Pathway modulated`, `Molecular Mechanism`)) %>%
   filter(`DrugBank:Main Name` %in% drugs) %>%
   mutate(
     `Molecular Mechanism` = case_when(
-      str_count(`Molecular Mechanism`, fixed(",")) > 0 ~ "↓ GABA A receptor, ↑ GAT1",
+      str_count(`Molecular Mechanism`, fixed(",")) > 0 ~ "↓ GABA A receptor",
       str_count(`Molecular Mechanism`, fixed("GABA A")) > 0 ~ "↓ GABA A receptor",
       str_count(`Molecular Mechanism`, fixed("GABA B")) > 0 ~ "↓ GABA B receptor",
+      str_count(`Molecular Mechanism`, fixed("everything")) > 0 ~ "↓ GABA B receptor",
       str_count(`Molecular Mechanism`, fixed("GAT1")) > 0 ~ "↑ GAT1",
       TRUE ~ `Molecular Mechanism`
     )
   ) %>%
-  arrange(desc(Score), `DrugBank:Main Name`)
+  mutate(
+    the_sorter = case_when(
+      str_count(`Molecular Mechanism`, fixed("GABA A")) > 0 ~ 3,
+      str_count(`Molecular Mechanism`, fixed("GABA B")) > 0 ~ 2,
+      str_count(`Molecular Mechanism`, fixed("GAT1")) > 0 ~ 1,
+      TRUE ~ 0
+    )
+  ) %>%
+  mutate(
+    `Pathway modulated` = str_replace_all(`Pathway modulated`, fixed("upregulate"), "↑"),
+    `Pathway modulated` = str_replace_all(`Pathway modulated`, fixed("inhibit"), "↓"),
+  ) %>%
+  arrange(the_sorter, desc(Score), `DrugBank:Main Name`) %>%
+  select(-c(the_sorter))
 
 gt_table <- df %>%
   # start using the gt package to style the table
@@ -49,6 +66,7 @@ gt_table <- df %>%
   cols_label(
     `DrugBank:Main Name` = md("**Drug**"),
     `Score` = md("**Score**"),
+    `Pathway modulated` = md("**Pathways Modulated**"),
     `Molecular Mechanism` = md("**Molecular Hypothesis**")
   ) %>%
   # center the text of the column labels
@@ -88,6 +106,9 @@ gt_table <- df %>%
       cell_text(align = "center")
     ),
     locations = cells_body()
+  ) %>%
+  cols_width(
+    `Pathway modulated` ~ px(400)
   ) %>%
   fmt_markdown(columns = everything()) %>%
   opt_table_outline() %>%
