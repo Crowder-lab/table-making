@@ -125,6 +125,10 @@ gt_table <- df %>%
     ),
     locations = cells_body()
   ) %>%
+  gt_add_divider(
+    columns = c(`DrugBank:Main Name`, Score, `Pathway modulated`),
+    color = "grey80"
+  ) %>%
   # add A and B subscripts
   text_replace(
     locations = cells_body(columns = `Molecular Mechanism`),
