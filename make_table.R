@@ -125,6 +125,12 @@ gt_table <- df %>%
     ),
     locations = cells_body()
   ) %>%
+  # add A and B subscripts
+  text_replace(
+    locations = cells_body(columns = `Molecular Mechanism`),
+    pattern = " ([AB])",
+    replacement = "<sub>\\1</sub>"
+  ) %>%
   fmt_markdown(columns = everything()) %>%
   opt_table_outline() %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
