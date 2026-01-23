@@ -64,12 +64,19 @@ df <- read_csv("ZC4H2 Drug Data Story - Oral route only.csv") %>%
   mutate(`search term` = str_split(`search term`, ", ")) %>%
   rowwise() %>%
   mutate(
-    `search term` = `search term` |>
-      str_subset("\\(human\\)") |>
-      str_c(collapse = ", ") |>
-      str_replace_all(fixed("(human)"), "") |>
-      str_replace_all(fixed(" ,"), ",") |>
+    `search term` = `search term` %>%
+      str_subset("\\(human\\)") %>%
+      str_c(collapse = ", ") %>%
+      str_replace_all(fixed("(human)"), "") %>%
+      str_replace_all(fixed(" ,"), ",") %>%
       str_to_upper()
+  ) %>%
+  ungroup() %>%
+  rowwise() %>%
+  mutate(
+    `Therapeutic Category` = `Therapeutic Category` %>%
+      str_split(", ") %>%
+      map_chr(~ paste(sort(.x, decreasing = TRUE), collapse = ", "))
   ) %>%
   ungroup() %>%
   mutate(`search term` = str_replace_all(`search term`, "([A-Z0-9]+)", "↑ \\1")) %>%
@@ -137,6 +144,9 @@ for (i in seq_along(dfs)) {
     gt_add_divider(
       columns = c(`DrugBank:Main Name`, Score, unravel, `Therapeutic Category`, `Targeted Symptoms`, `search term`),
       color = "grey80"
+    ) %>%
+    cols_width(
+      `Therapeutic Category` ~ px(150)
     ) %>%
     fmt_markdown(columns = everything()) %>%
     opt_table_outline() %>%
