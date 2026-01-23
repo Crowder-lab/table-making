@@ -72,64 +72,77 @@ df <- read_csv("ZC4H2 Drug Data Story - Oral route only.csv") %>%
       str_to_upper()
   ) %>%
   ungroup() %>%
+  mutate(`search term` = str_replace_all(`search term`, "([A-Z0-9]+)", "↑ \\1")) %>%
   mutate(`Therapeutic Category` = str_replace(`Therapeutic Category`, fixed("Protein of interest modulator"), "↑ ZC4H2")) %>%
   select(c(`DrugBank:Main Name`, Score, unravel, `Therapeutic Category`, `Targeted Symptoms`, `search term`)) %>%
   filter(`Therapeutic Category` != "")
 
-gt_table <- df %>%
-  # start using the gt package to style the table
-  gt() %>%
-  # make column labels bold and add emojis
-  cols_label(
-    `DrugBank:Main Name` = md("**Drug**"),
-    `Score` = md("**Score**"),
-    `unravel` = md("**Unravel**"),
-    `Therapeutic Category` = md("**Therapeutic Category**"),
-    `Targeted Symptoms` = md("**Targeted Symptoms**"),
-    `search term` = md("**Targeted Genes**")
-  ) %>%
-  # center the text of the column labels
-  tab_style(
-    style = list(
-      cell_text(align = "center")
-    ),
-    locations = cells_column_labels()
-  ) %>%
-  # bold the left-most column
-  tab_style(
-    style = list(
-      cell_text(weight = "bold")
-    ),
-    locations = cells_body(columns = `DrugBank:Main Name`)
-  ) %>%
-  # set every other body row to be light grey
-  tab_style(
-    style = list(
-      # grey95 = 95% lightness
-      # nearly white
-      cell_fill(color = "grey95")
-    ),
-    # do only the body cells - i.e. exclude the header row(s)
-    locations = cells_body(
-      rows = seq(1, nrow(df), 2)
-    )
-  ) %>%
-  tab_style(
-    style = list(
-      cell_fill(color = "grey90")
-    ),
-    locations = cells_body(columns = `DrugBank:Main Name`)
-  ) %>%
-  tab_style(
-    style = list(
-      cell_text(align = "center")
-    ),
-    locations = cells_body()
-  ) %>%
-  fmt_markdown(columns = everything()) %>%
-  opt_table_outline() %>%
-  sub_missing(columns = everything(), rows = everything(), missing_text = "")
+dfs <- list(filter(df, Score == 6), filter(df, Score < 6))
+df_names <- list("ZC4H2 Unravel overlap 6s.", "ZC4H2 Unravel overlap 4s 5s.")
 
-for (extension in c("html", "png", "docx")) {
-  gtsave(gt_table, paste0("ZC4H2 Unravel overlap.", extension))
+for (i in seq_along(dfs)) {
+  df <- dfs[[i]]
+  df_name <- df_names[[i]]
+
+  gt_table <- df %>%
+    # start using the gt package to style the table
+    gt() %>%
+    # make column labels bold and add emojis
+    cols_label(
+      `DrugBank:Main Name` = md("**Drug**"),
+      `Score` = md("**Score**"),
+      `unravel` = md("**Unravel**"),
+      `Therapeutic Category` = md("**Therapeutic Category**"),
+      `Targeted Symptoms` = md("**Targeted Symptoms**"),
+      `search term` = md("**Pathway Modulated**")
+    ) %>%
+    # center the text of the column labels
+    tab_style(
+      style = list(
+        cell_text(align = "center")
+      ),
+      locations = cells_column_labels()
+    ) %>%
+    # bold the left-most column
+    tab_style(
+      style = list(
+        cell_text(weight = "bold")
+      ),
+      locations = cells_body(columns = `DrugBank:Main Name`)
+    ) %>%
+    # set every other body row to be light grey
+    tab_style(
+      style = list(
+        # grey95 = 95% lightness
+        # nearly white
+        cell_fill(color = "grey95")
+      ),
+      # do only the body cells - i.e. exclude the header row(s)
+      locations = cells_body(
+        rows = seq(1, nrow(df), 2)
+      )
+    ) %>%
+    tab_style(
+      style = list(
+        cell_fill(color = "grey90")
+      ),
+      locations = cells_body(columns = `DrugBank:Main Name`)
+    ) %>%
+    tab_style(
+      style = list(
+        cell_text(align = "center")
+      ),
+      locations = cells_body()
+    ) %>%
+    gt_add_divider(
+      columns = c(`DrugBank:Main Name`, Score, unravel, `Therapeutic Category`, `Targeted Symptoms`, `search term`),
+      color = "grey80"
+    ) %>%
+    fmt_markdown(columns = everything()) %>%
+    opt_table_outline() %>%
+    sub_missing(columns = everything(), rows = everything(), missing_text = "")
+
+  for (extension in c("html", "png", "docx")) {
+    gtsave(gt_table, paste0(df_name, extension))
+  }
 }
