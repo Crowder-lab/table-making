@@ -72,6 +72,7 @@ df <- read_csv("ZC4H2 Drug Data Story - Oral route only.csv") %>%
       str_to_upper()
   ) %>%
   ungroup() %>%
+  mutate(`Therapeutic Category` = str_replace(`Therapeutic Category`, fixed("Protein of interest modulator"), "↑ ZC4H2")) %>%
   select(c(`DrugBank:Main Name`, Score, unravel, `Therapeutic Category`, `Targeted Symptoms`, `search term`)) %>%
   filter(`Therapeutic Category` != "")
 
