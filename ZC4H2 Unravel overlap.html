@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+
+</head>
+<body>
+<div id="kyptcapoup" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#kyptcapoup table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kyptcapoup thead, #kyptcapoup tbody, #kyptcapoup tfoot, #kyptcapoup tr, #kyptcapoup td, #kyptcapoup th {
+  border-style: none;
+}
+
+#kyptcapoup p {
+  margin: 0;
+  padding: 0;
+}
+
+#kyptcapoup .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #D3D3D3;
+  border-right-style: solid;
+  border-right-width: 3px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: solid;
+  border-left-width: 3px;
+  border-left-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kyptcapoup .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kyptcapoup .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kyptcapoup .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kyptcapoup .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kyptcapoup .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kyptcapoup .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kyptcapoup .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kyptcapoup .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kyptcapoup .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kyptcapoup .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kyptcapoup .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kyptcapoup .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kyptcapoup .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kyptcapoup .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyptcapoup .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kyptcapoup .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kyptcapoup .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kyptcapoup .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyptcapoup .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kyptcapoup .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyptcapoup .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kyptcapoup .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyptcapoup .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kyptcapoup .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyptcapoup .gt_left {
+  text-align: left;
+}
+
+#kyptcapoup .gt_center {
+  text-align: center;
+}
+
+#kyptcapoup .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kyptcapoup .gt_font_normal {
+  font-weight: normal;
+}
+
+#kyptcapoup .gt_font_bold {
+  font-weight: bold;
+}
+
+#kyptcapoup .gt_font_italic {
+  font-style: italic;
+}
+
+#kyptcapoup .gt_super {
+  font-size: 65%;
+}
+
+#kyptcapoup .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kyptcapoup .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kyptcapoup .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kyptcapoup .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kyptcapoup .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kyptcapoup .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kyptcapoup .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kyptcapoup .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kyptcapoup div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="text-align: center;" scope="col" id="DrugBank:Main-Name"><span class='gt_from_md'><strong>Drug</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="text-align: center;" scope="col" id="Score"><span class='gt_from_md'><strong>Score</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="text-align: center;" scope="col" id="unravel"><span class='gt_from_md'><strong>Unravel</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="text-align: center;" scope="col" id="Therapeutic-Category"><span class='gt_from_md'><strong>Therapeutic Category</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="text-align: center;" scope="col" id="Targeted-Symptoms"><span class='gt_from_md'><strong>Targeted Symptoms</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="text-align: center;" scope="col" id="search-term"><span class='gt_from_md'><strong>Targeted Genes</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Acetylcysteine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>PRDM1, DLG4, FOSL2, CTCF, SMAD5, ELF1, ETS1</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Amitriptyline</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM, DLG4, FOSL2, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Betamethasone</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>RLIM, FOSL2</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Budesonide</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>congenital laryngomalacia, arthrogryposis multiplex congenita, congenital vertical talus</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>PRDM1, FOSL2, CTCF, SMAD5, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Buspirone</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Clonidine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Cyproheptadine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Desvenlafaxine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Escitalopram</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>DLG4</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Fluvoxamine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Gabapentin</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Glutamic acid</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Hydroxyzine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Loratadine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>congenital vertical talus</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Lovastatin</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>PRDM1, RLIM, FOSL2, SMAD5</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Metformin</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM, DLG4, FOSL2, ELF1, ETS1</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Metoprolol</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>RLIM</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Oseltamivir</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>arthrogryposis multiplex congenita</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Propranolol</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>PRDM1, RLIM, FOSL2, CTCF, SMAD5, ETS1, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Pyridoxine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>movement disorder, hypotonia, congenital vertical talus, dystonia, developmental delay, arthrogryposis multiplex congenita</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Sertraline</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>RLIM, SMAD5</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Triamcinolone</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>6</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>intellectual disability, atrial septal defect, congenital vertical talus, congenital laryngomalacia, dystonia</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>FOSL2, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Atomoxetine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Calcitriol</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM, FOSL2, CTCF, SMAD5, ETS1, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Captopril</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>intellectual disability</span></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Cholecalciferol</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>PRDM1, RLIM, JUND, FOSL2, CTCF, SMAD5</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Desloratadine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>DLG4</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Dextromethorphan</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Ezetimibe</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>ELF1</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Fexofenadine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>neuromuscular junction disease</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Gemfibrozil</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>FOSL2, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Guanfacine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>DLG4, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Levetiracetam</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>FOSL2</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Lidocaine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>FOSL2, CTCF, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Memantine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>DLG4</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Methylprednisolone</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Increase neuroplasticity, Increase dendritic spine density</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM, FOSL2, CTCF</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Midodrine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>5</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>movement disorder</span></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Alfacalcidol</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>dystonia</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Amantadine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>dystonia</span></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Bisoprolol</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>RLIM</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Clemastine</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Increase neuroplasticity</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Flunarizine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Hydroxyurea</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>FOSL2, CTCF, SMAD5, ETS1, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Lisdexamfetamine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Naloxone</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>PRDM1, FOSL2, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Pregabalin</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>PRDM1, JUND</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Progesterone</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Protein of interest modulator, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>RLIM, FOSL2, CTCF, SMAD5, ELF1, ETS1, FOS</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Pseudoephedrine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Succinic acid</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>movement disorder</span></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Terbinafine</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>neuromuscular junction disease</span></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Tranexamic acid</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Symptomatic relief</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>joint dislocation</span></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Tretinoin</span></td>
+<td headers="Score" class="gt_row gt_right" style="text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>Increase neuroplasticity, Increase dendritic spine density, Protein of interest modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="text-align: center;"><br /></td>
+<td headers="search term" class="gt_row gt_left" style="text-align: center;"><span class='gt_from_md'>FOSL2, CTCF, ETS1, ELF1</span></td></tr>
+    <tr><td headers="DrugBank:Main Name" class="gt_row gt_left" style="font-weight: bold; text-align: center; background-color: #E5E5E5;"><span class='gt_from_md'>Trihexyphenidyl</span></td>
+<td headers="Score" class="gt_row gt_right" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>4</span></td>
+<td headers="unravel" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>✓</span></td>
+<td headers="Therapeutic Category" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>Symptomatic relief, Neurotransmitter modulator</span></td>
+<td headers="Targeted Symptoms" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'>dystonia</span></td>
+<td headers="search term" class="gt_row gt_left" style="background-color: #F2F2F2; text-align: center;"><span class='gt_from_md'></span></td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</body>
+</html>

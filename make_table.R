@@ -10,72 +10,70 @@ library(gtExtras)
 # (or another chromium-based browser)
 Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 
-updown <- c(
-  slc6a1 = "↑",
-  stx1a = "↓",
-  kctd8 = "↑",
-  kctd12 = "↑",
-  kctd16 = "↑",
-  grk2 = "↑",
-  grk3 = "↑",
-  arrb2 = "↑",
-  rgs4 = "↑",
-  rgs6 = "↑",
-  rgs7 = "↑",
-  rest = "↑",
-  mecp2 = "↑",
-  gabra1 = "↓",
-  gabrb2 = "↓",
-  gabrg2 = "↓",
-  gabbr1 = "↓",
-  gabbr2 = "↓",
-  prkcg = "↑",
-  prkcb = "↑",
-  prkca = "↑",
-  cdk5 = "↑",
-  gsk3b = "↑",
-  rnf34 = "↑",
-  slc12a2 = "↑",
-  sting1 = "↑",
-  tbk1 = "↑",
-  irf3 = "↑"
+unravel = c(
+  "terbinafine",
+  "lovastatin",
+  "hydroxyurea",
+  "calcitriol",
+  "memantine",
+  "metoprolol",
+  "gemfibrozil",
+  "betamethasone",
+  "levetiracetam",
+  "clonidine",
+  "ezetimibe",
+  "metformin",
+  "fexofenadine",
+  "loratadine",
+  "progesterone",
+  "fluvoxamine",
+  "bisoprolol",
+  "dextromethorphan",
+  "methylprednisolone",
+  "amitriptyline",
+  "sertraline",
+  "lidocaine",
+  "acetylcysteine",
+  "pyridoxine",
+  "captopril",
+  "naloxone",
+  "gabapentin",
+  "buspirone",
+  "amantadine",
+  "propranolol",
+  "budesonide",
+  "tretinoin",
+  "cyproheptadine",
+  "trihexyphenidyl",
+  "alfacalcidol",
+  "hydroxyzine",
+  "triamcinolone"
 )
 
-df <- read_csv("./SLC6A1 Drug Data Story - Genes Only.csv") %>%
-  select(c(`DrugBank:Main Name`, `Score`, `Pathway modulated`, `Molecular Mechanism`)) %>%
-  filter(`Score` >= 5) %>%
+# for genes
+all_ranked <- read_csv("zc4h2_all.csv")
+# for categories
+old_clinician <- read_csv("ZC4H2 Drug Data Story - Final Clinician Ranking.csv")
+
+df <- read_csv("ZC4H2 Drug Data Story - Oral route only.csv") %>%
+  filter(Score >= 4) %>%
+  mutate(unravel = ifelse(`Main Name` %in% unravel, "✓", "")) %>%
+  left_join(select(old_clinician, c(`DrugBank:Main Name`, `Therapeutic Category`, `Targeted Symptoms`)), by = join_by(`DrugBank:Main Name`)) %>%
+  left_join(select(all_ranked, c(`DrugBank:Main Name`, `search term`)), by = join_by(`DrugBank:Main Name`)) %>%
+  mutate(`search term` = str_replace_all(`search term`, "[\\[\\]’‘']", "")) %>%
+  mutate(`search term` = str_split(`search term`, ", ")) %>%
+  rowwise() %>%
   mutate(
-    gat1 = ifelse(str_detect(`Molecular Mechanism`, "GAT1"), "↑ GAT1", ""),
-    gabab = ifelse(str_detect(`Molecular Mechanism`, "GABA B"), "↓ GABA B receptor", ""),
-    gabaa = ifelse(str_detect(`Molecular Mechanism`, "GABA A"), "↓ GABA A receptor", "")
+    `search term` = `search term` |>
+      str_subset("\\(human\\)") |>
+      str_c(collapse = ", ") |>
+      str_replace_all(fixed("(human)"), "") |>
+      str_replace_all(fixed(" ,"), ",") |>
+      str_to_upper()
   ) %>%
-  mutate(
-    `Molecular Mechanism` =
-      str_c(gat1, gabab, gabaa, sep = ", ") %>%
-      str_replace_all(", , ", ", ") %>%
-      str_remove_all("^, |, $")
-  ) %>%
-  mutate(
-    the_sorter = case_when(
-      str_count(`Molecular Mechanism`, fixed("GAT1")) > 0 ~ 1,
-      str_count(`Molecular Mechanism`, fixed("GABA B")) > 0 ~ 2,
-      str_count(`Molecular Mechanism`, fixed("GABA A")) > 0 ~ 3,
-      TRUE ~ 0
-    )
-  ) %>%
-  mutate(
-    `Pathway modulated` = map_chr(
-      str_split(`Pathway modulated`, ", "),
-      ~ str_c(
-        updown[.x],
-        " ",
-        str_to_upper(.x),
-        collapse = ", "
-      )
-    )
-  ) %>%
-  arrange(the_sorter, desc(Score), `DrugBank:Main Name`) %>%
-  select(-c(the_sorter, gat1, gabaa, gabab))
+  ungroup() %>%
+  select(c(`DrugBank:Main Name`, Score, unravel, `Therapeutic Category`, `Targeted Symptoms`, `search term`)) %>%
+  filter(`Therapeutic Category` != "")
 
 gt_table <- df %>%
   # start using the gt package to style the table
@@ -84,8 +82,10 @@ gt_table <- df %>%
   cols_label(
     `DrugBank:Main Name` = md("**Drug**"),
     `Score` = md("**Score**"),
-    `Pathway modulated` = md("**Pathways Modulated**"),
-    `Molecular Mechanism` = md("**Molecular Hypothesis**")
+    `unravel` = md("**Unravel**"),
+    `Therapeutic Category` = md("**Therapeutic Category**"),
+    `Targeted Symptoms` = md("**Targeted Symptoms**"),
+    `search term` = md("**Targeted Genes**")
   ) %>%
   # center the text of the column labels
   tab_style(
@@ -130,5 +130,5 @@ gt_table <- df %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
 for (extension in c("html", "png", "docx")) {
-  gtsave(gt_table, paste0("SLC6A1 Grant.", extension))
+  gtsave(gt_table, paste0("ZC4H2 Unravel overlap.", extension))
 }
