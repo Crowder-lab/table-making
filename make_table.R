@@ -10,135 +10,145 @@ library(gtExtras)
 # (or another chromium-based browser)
 Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 
+all_ranked <- read_csv("ranked.csv")
+
 updown <- c(
-  slc6a1 = "↑",
-  stx1a = "↓",
-  kctd8 = "↑",
-  kctd12 = "↑",
-  kctd16 = "↑",
-  grk2 = "↑",
-  grk3 = "↑",
-  arrb2 = "↑",
-  rgs4 = "↑",
-  rgs6 = "↑",
-  rgs7 = "↑",
-  rest = "↑",
-  mecp2 = "↑",
-  gabra1 = "↓",
-  gabrb2 = "↓",
-  gabrg2 = "↓",
-  gabbr1 = "↓",
-  gabbr2 = "↓",
-  prkcg = "↑",
-  prkcb = "↑",
-  prkca = "↑",
-  cdk5 = "↑",
-  gsk3b = "↑",
-  rnf34 = "↑",
-  slc12a2 = "↑",
-  sting1 = "↑",
-  tbk1 = "↑",
-  irf3 = "↑"
+  fzd10 = "↑",
+  rbm24 = "↑",
+  itgb3 = "↑",
+  golga7b = "↑",
+  tac1 = "↑",
+  phox2b = "↑",
+  cdk5r2 = "↑",
+  nrn1 = "↑",
+  col3a1 = "↑",
+  loxl4 = "↑",
+  cpa4 = "↑",
+  nppb = "↑",
+  itga11 = "↑",
+  isl1 = "↑",
+  kcnc3 = "↑",
+  ebf1 = "↑",
+  cebpd = "↑",
+  acta2 = "↑",
+  chl1 = "↑",
+  snap25 = "↑",
+  znf558 = "↓",
+  insl3 = "↓",
+  znf681 = "↓",
+  ctsf = "↓",
+  nkapl = "↓",
+  tceal5 = "↓",
+  slc30a8 = "↓",
+  rtp1 = "↓",
+  large1 = "↓",
+  htr1a = "↓",
+  ect2l = "↓",
+  fsip2 = "↓",
+  arrb1 = "↓",
+  tdrd1 = "↓",
+  znf283 = "↓",
+  spata16 = "↓",
+  oxsm = "↓"
 )
 
-df <- read_csv("./SLC6A1 Drug Data Story - Genes Only.csv") %>%
-  select(c(`DrugBank:Main Name`, `Score`, `Pathway modulated`, `Molecular Mechanism`)) %>%
-  filter(`Score` >= 5) %>%
+df <- read_csv("threes.csv") %>%
+  select(c(`DrugBank:Main Name`, `Score`)) %>%
+  filter(`Score` >= 3) %>%
+  left_join(select(all_ranked, c(`DrugBank:Main Name`, `search term`)), by = join_by(`DrugBank:Main Name`)) %>%
+  mutate(`search term` = str_replace_all(`search term`, "[\\[\\]’‘']", "")) %>%
+  mutate(`search term` = str_split(`search term`, ", ")) %>%
+  rowwise() %>%
   mutate(
-    gat1 = ifelse(str_detect(`Molecular Mechanism`, "GAT1"), "↑ GAT1", ""),
-    gabab = ifelse(str_detect(`Molecular Mechanism`, "GABA B"), "↓ GABA B receptor", ""),
-    gabaa = ifelse(str_detect(`Molecular Mechanism`, "GABA A"), "↓ GABA A receptor", "")
+    `search term` = `search term` %>%
+      str_subset("\\(human\\)") %>%
+      str_c(collapse = ", ") %>%
+      str_replace_all(fixed(" (human)"), "") %>%
+      str_replace_all(fixed(" ,"), ",") %>%
+      str_to_upper()
   ) %>%
+  ungroup() %>%
   mutate(
-    `Molecular Mechanism` =
-      str_c(gat1, gabab, gabaa, sep = ", ") %>%
-      str_replace_all(", , ", ", ") %>%
-      str_remove_all("^, |, $")
-  ) %>%
-  mutate(
-    the_sorter = case_when(
-      str_count(`Molecular Mechanism`, fixed("GAT1")) > 0 ~ 1,
-      str_count(`Molecular Mechanism`, fixed("GABA B")) > 0 ~ 2,
-      str_count(`Molecular Mechanism`, fixed("GABA A")) > 0 ~ 3,
-      TRUE ~ 0
-    )
-  ) %>%
-  mutate(
-    `Pathway modulated` = map_chr(
-      str_split(`Pathway modulated`, ", "),
+    `search term` = map_chr(
+      str_split(`search term`, ", "),
       ~ str_c(
-        updown[.x],
+        updown[str_to_lower(.x)],
         " ",
         str_to_upper(.x),
         collapse = ", "
       )
     )
-  ) %>%
-  arrange(the_sorter, desc(Score), `DrugBank:Main Name`) %>%
-  select(-c(the_sorter, gat1, gabaa, gabab))
+  )
 
-gt_table <- df %>%
-  # start using the gt package to style the table
-  gt() %>%
-  # make column labels bold and add emojis
-  cols_label(
-    `DrugBank:Main Name` = md("**Drug**"),
-    `Score` = md("**Score**"),
-    `Pathway modulated` = md("**Pathways Modulated**"),
-    `Molecular Mechanism` = md("**Molecular Hypothesis**")
-  ) %>%
-  # center the text of the column labels
-  tab_style(
-    style = list(
-      cell_text(align = "center")
-    ),
-    locations = cells_column_labels()
-  ) %>%
-  # bold the left-most column
-  tab_style(
-    style = list(
-      cell_text(weight = "bold")
-    ),
-    locations = cells_body(columns = `DrugBank:Main Name`)
-  ) %>%
-  # set every other body row to be light grey
-  tab_style(
-    style = list(
-      # grey95 = 95% lightness
-      # nearly white
-      cell_fill(color = "grey95")
-    ),
-    # do only the body cells - i.e. exclude the header row(s)
-    locations = cells_body(
-      rows = seq(1, nrow(df), 2)
-    )
-  ) %>%
-  tab_style(
-    style = list(
-      cell_fill(color = "grey90")
-    ),
-    locations = cells_body(columns = `DrugBank:Main Name`)
-  ) %>%
-  tab_style(
-    style = list(
-      cell_text(align = "center")
-    ),
-    locations = cells_body()
-  ) %>%
-  gt_add_divider(
-    columns = c(`DrugBank:Main Name`, Score, `Pathway modulated`),
-    color = "grey80"
-  ) %>%
-  # add A and B subscripts
-  text_replace(
-    locations = cells_body(columns = `Molecular Mechanism`),
-    pattern = " ([AB])",
-    replacement = "<sub>\\1</sub>"
-  ) %>%
-  fmt_markdown(columns = everything()) %>%
-  opt_table_outline() %>%
-  sub_missing(columns = everything(), rows = everything(), missing_text = "")
+dfs <- list(filter(df, Score == 6), filter(df, Score %in% c(4, 5)), filter(df, Score == 3))
+df_names <- list("iPSC gene modulation 6s.", "iPSC gene modulation 4s 5s.", "iPSC gene modulation 3s.")
 
-for (extension in c("html", "png", "docx")) {
-  gtsave(gt_table, paste0("SLC6A1 Grant.", extension))
+for (i in seq_along(dfs)) {
+  df <- dfs[[i]]
+  df_name <- df_names[[i]]
+
+  gt_table <- df %>%
+    # start using the gt package to style the table
+    gt() %>%
+    # make column labels bold and add emojis
+    cols_label(
+      `DrugBank:Main Name` = md("**Drug**"),
+      `Score` = md("**Score**"),
+      `search term` = md("**Genes Modulated**"),
+    ) %>%
+    # center the text of the column labels
+    tab_style(
+      style = list(
+        cell_text(align = "center")
+      ),
+      locations = cells_column_labels()
+    ) %>%
+    # bold the left-most column
+    tab_style(
+      style = list(
+        cell_text(weight = "bold")
+      ),
+      locations = cells_body(columns = `DrugBank:Main Name`)
+    ) %>%
+    # set every other body row to be light grey
+    tab_style(
+      style = list(
+        # grey95 = 95% lightness
+        # nearly white
+        cell_fill(color = "grey95")
+      ),
+      # do only the body cells - i.e. exclude the header row(s)
+      locations = cells_body(
+        rows = seq(1, nrow(df), 2)
+      )
+    ) %>%
+    tab_style(
+      style = list(
+        cell_fill(color = "grey90")
+      ),
+      locations = cells_body(columns = `DrugBank:Main Name`)
+    ) %>%
+    tab_style(
+      style = list(
+        cell_text(align = "center")
+      ),
+      locations = cells_body()
+    ) %>%
+    # gt_add_divider(
+    #   columns = c(`DrugBank:Main Name`, Score, `Pathway modulated`),
+    #   color = "grey80"
+    # ) %>%
+    # # add A and B subscripts
+    # text_replace(
+    #   locations = cells_body(columns = `Molecular Mechanism`),
+    #   pattern = " ([AB])",
+    #   replacement = "<sub>\\1</sub>"
+    # ) %>%
+    fmt_markdown(columns = everything()) %>%
+    opt_table_outline() %>%
+    sub_missing(columns = everything(), rows = everything(), missing_text = "")
+
+  for (extension in c("html", "png", "docx")) {
+    gtsave(gt_table, paste0(df_name, extension))
+  }
 }
