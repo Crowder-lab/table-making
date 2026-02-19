@@ -77,8 +77,10 @@ df <- read_csv("threes.csv") %>%
         str_to_upper(.x),
         collapse = ", "
       )
-    ),
-    `DEs in iPSC dataset` = str_replace_all(`search term`, c("↑" = "↓", "↓" = "↑"))
+    )
+  ) %>%
+  mutate(
+    `DEs in iPSC dataset` = str_replace_all(`search term`, c("↑" = "d", "↓" = "↑", "d" = "↓"))
   )
 
 dfs <- list(filter(df, Score == 6), filter(df, Score %in% c(4, 5)), filter(df, Score == 3))
@@ -136,16 +138,6 @@ for (i in seq_along(dfs)) {
       ),
       locations = cells_body()
     ) %>%
-    # gt_add_divider(
-    #   columns = c(`DrugBank:Main Name`, Score, `Pathway modulated`),
-    #   color = "grey80"
-    # ) %>%
-    # # add A and B subscripts
-    # text_replace(
-    #   locations = cells_body(columns = `Molecular Mechanism`),
-    #   pattern = " ([AB])",
-    #   replacement = "<sub>\\1</sub>"
-    # ) %>%
     fmt_markdown(columns = everything()) %>%
     opt_table_outline() %>%
     sub_missing(columns = everything(), rows = everything(), missing_text = "")
