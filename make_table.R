@@ -8,7 +8,7 @@ library(gtExtras)
 # This is needed to output a .png photo file
 # Replace inside the " " with the path to Google Chrome
 # (or another chromium-based browser)
-Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+# Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 
 all_ranked <- read_csv("ranked.csv")
 
@@ -77,7 +77,8 @@ df <- read_csv("threes.csv") %>%
         str_to_upper(.x),
         collapse = ", "
       )
-    )
+    ),
+    `DEs in iPSC dataset` = str_replace_all(`search term`, c("↑" = "↓", "↓" = "↑"))
   )
 
 dfs <- list(filter(df, Score == 6), filter(df, Score %in% c(4, 5)), filter(df, Score == 3))
@@ -95,6 +96,7 @@ for (i in seq_along(dfs)) {
       `DrugBank:Main Name` = md("**Drug**"),
       `Score` = md("**Score**"),
       `search term` = md("**Genes Modulated**"),
+      `DEs in iPSC dataset` = md("**DEs in iPSC Dataset**"),
     ) %>%
     # center the text of the column labels
     tab_style(
