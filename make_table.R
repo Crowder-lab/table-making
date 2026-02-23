@@ -5,144 +5,108 @@ library(readxl)
 library(gt)
 library(gtExtras)
 
-# This is needed to output a .png photo file
-# Replace inside the " " with the path to Google Chrome
-# (or another chromium-based browser)
-# Sys.setenv(CHROMOTE_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+raw <- read_excel("Table 2. Clinical phenotypes.xlsx", col_names = FALSE)
 
-all_ranked <- read_csv("ranked.csv")
+spanner_label <- raw %>%
+  slice(1) %>%
+  pull(3) %>%
+  str_squish()
+variant_cols <- c("n = 1", "n = 5", "n = 12")
 
-updown <- c(
-  fzd10 = "↑",
-  rbm24 = "↑",
-  itgb3 = "↑",
-  golga7b = "↑",
-  tac1 = "↑",
-  phox2b = "↑",
-  cdk5r2 = "↑",
-  nrn1 = "↑",
-  col3a1 = "↑",
-  loxl4 = "↑",
-  cpa4 = "↑",
-  nppb = "↑",
-  itga11 = "↑",
-  isl1 = "↑",
-  kcnc3 = "↑",
-  ebf1 = "↑",
-  cebpd = "↑",
-  acta2 = "↑",
-  chl1 = "↑",
-  snap25 = "↑",
-  znf558 = "↓",
-  insl3 = "↓",
-  znf681 = "↓",
-  ctsf = "↓",
-  nkapl = "↓",
-  tceal5 = "↓",
-  slc30a8 = "↓",
-  rtp1 = "↓",
-  large1 = "↓",
-  htr1a = "↓",
-  ect2l = "↓",
-  fsip2 = "↓",
-  arrb1 = "↓",
-  tdrd1 = "↓",
-  znf283 = "↓",
-  spata16 = "↓",
-  oxsm = "↓"
+cognitive_set <- c(
+  "Intellectual disability",
+  "Delay in language",
+  "Autism",
+  "Sensory integration disorder",
+  "ADHD",
+  "Anxiety"
+)
+motor_set <- c(
+  "Delay in gross motor",
+  "Delay in fine motor",
+  "Hypotonia",
+  "Hypertonia",
+  "Dystonia",
+  "Myoclonus",
+  "Tremor",
+  "Ataxia"
 )
 
-df <- read_csv("threes.csv") %>%
-  select(c(`DrugBank:Main Name`, `Score`)) %>%
-  filter(`Score` >= 3) %>%
-  left_join(select(all_ranked, c(`DrugBank:Main Name`, `search term`)), by = join_by(`DrugBank:Main Name`)) %>%
-  mutate(`search term` = str_replace_all(`search term`, "[\\[\\]’‘']", "")) %>%
-  mutate(`search term` = str_split(`search term`, ", ")) %>%
-  rowwise() %>%
-  mutate(
-    `search term` = `search term` %>%
-      str_subset("\\(human\\)") %>%
-      str_c(collapse = ", ") %>%
-      str_replace_all(fixed(" (human)"), "") %>%
-      str_replace_all(fixed(" ,"), ",") %>%
-      str_to_upper()
+df <- raw %>%
+  slice(4:n()) %>%
+  set_names(c("phenotype", "n = 1", "n = 5", "n = 12")) %>%
+  mutate(across(all_of(variant_cols), as.numeric)) %>%
+  mutate(domain = case_when(
+    phenotype %in% cognitive_set ~ "Cognitive Domains",
+    phenotype %in% motor_set ~ "Motor Domains",
+    phenotype == "Microcephaly" ~ ""
+  )) %>%
+  group_by(domain)
+
+gt_table <- df %>%
+  # start using the gt package to style the table
+  gt() %>%
+  # add extra stuff above
+  cols_label(
+    phenotype = "",
+    `n = 1` = md("*n = 1*"),
+    `n = 5` = md("*n = 5*"),
+    `n = 12` = md("*n = 12*")
   ) %>%
-  ungroup() %>%
-  mutate(
-    `search term` = map_chr(
-      str_split(`search term`, ", "),
-      ~ str_c(
-        updown[str_to_lower(.x)],
-        " ",
-        str_to_upper(.x),
-        collapse = ", "
-      )
+  tab_spanner(
+    label = "p.E27X",
+    columns = `n = 1`
+  ) %>%
+  tab_spanner(
+    label = "p.R578C",
+    columns = `n = 5`
+  ) %>%
+  tab_spanner(
+    label = "p.R1146C",
+    columns = `n = 12`
+  ) %>%
+  tab_spanner(
+    label = md(paste0("**", spanner_label, "**")),
+    columns = variant_cols
+  ) %>%
+  # center the text of the column labels
+  tab_style(
+    style = list(
+      cell_text(align = "center")
+    ),
+    locations = cells_column_labels()
+  ) %>%
+  # format data as percentages
+  fmt_percent(
+    columns = variant_cols,
+    decimals = 1
+  ) %>%
+  # tab styling
+  tab_style(
+    style = list(
+      cell_fill(color = "grey95")
+    ),
+    locations = cells_body(
+      rows = domain %in% c("", "Motor Domains")
     )
   ) %>%
-  mutate(
-    `DEs in iPSC dataset` = str_replace_all(`search term`, c("↑" = "d", "↓" = "↑", "d" = "↓"))
-  )
+  tab_style(
+    style = list(
+      cell_text(align = "center")
+    ),
+    locations = cells_body(columns = variant_cols)
+  ) %>%
+  gt_color_rows(
+    columns = variant_cols,
+    palette = c("#A90C38FF", "#FFFCFCFF", "#2E5A87FF"),
+    domain = c(0, 1)
+  ) %>%
+  tab_options(
+    table.border.top.style = "hidden",
+    row_group.as_column = TRUE
+  ) %>%
+  sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
-dfs <- list(filter(df, Score == 6), filter(df, Score %in% c(4, 5)), filter(df, Score == 3))
-df_names <- list("iPSC gene modulation 6s.", "iPSC gene modulation 4s 5s.", "iPSC gene modulation 3s.")
-
-for (i in seq_along(dfs)) {
-  df <- dfs[[i]]
-  df_name <- df_names[[i]]
-
-  gt_table <- df %>%
-    # start using the gt package to style the table
-    gt() %>%
-    # make column labels bold and add emojis
-    cols_label(
-      `DrugBank:Main Name` = md("**Drug**"),
-      `Score` = md("**Score**"),
-      `search term` = md("**Genes Modulated**"),
-      `DEs in iPSC dataset` = md("**DEs in iPSC Dataset**"),
-    ) %>%
-    # center the text of the column labels
-    tab_style(
-      style = list(
-        cell_text(align = "center")
-      ),
-      locations = cells_column_labels()
-    ) %>%
-    # bold the left-most column
-    tab_style(
-      style = list(
-        cell_text(weight = "bold")
-      ),
-      locations = cells_body(columns = `DrugBank:Main Name`)
-    ) %>%
-    # set every other body row to be light grey
-    tab_style(
-      style = list(
-        # grey95 = 95% lightness
-        # nearly white
-        cell_fill(color = "grey95")
-      ),
-      # do only the body cells - i.e. exclude the header row(s)
-      locations = cells_body(
-        rows = seq(1, nrow(df), 2)
-      )
-    ) %>%
-    tab_style(
-      style = list(
-        cell_fill(color = "grey90")
-      ),
-      locations = cells_body(columns = `DrugBank:Main Name`)
-    ) %>%
-    tab_style(
-      style = list(
-        cell_text(align = "center")
-      ),
-      locations = cells_body()
-    ) %>%
-    fmt_markdown(columns = everything()) %>%
-    opt_table_outline() %>%
-    sub_missing(columns = everything(), rows = everything(), missing_text = "")
-
-  for (extension in c("html", "png", "docx")) {
-    gtsave(gt_table, paste0(df_name, extension))
-  }
+for (extension in c("html", "png", "docx")) {
+  gtsave(gt_table, paste0("Variants 2026-02.", extension))
 }
