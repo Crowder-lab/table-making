@@ -41,7 +41,11 @@ df <- raw %>%
     phenotype %in% motor_set ~ "Motor Domains",
     phenotype == "Microcephaly" ~ ""
   )) %>%
-  group_by(domain)
+  group_by(domain) %>%
+  mutate(
+    is_group_end = row_number() == n(),
+    is_table_start = phenotype == "Microcephaly"
+  )
 
 gt_table <- df %>%
   # start using the gt package to style the table
@@ -84,11 +88,20 @@ gt_table <- df %>%
   # tab styling
   tab_style(
     style = list(
+      # grey95 = 95% lightness
+      # nearly white
       cell_fill(color = "grey95")
     ),
+    # do only the body cells - i.e. exclude the header row(s)
     locations = cells_body(
-      rows = domain %in% c("", "Motor Domains")
+      rows = seq(1, nrow(df), 2)
     )
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "grey90")
+    ),
+    locations = cells_body(columns = phenotype)
   ) %>%
   tab_style(
     style = list(
@@ -96,15 +109,43 @@ gt_table <- df %>%
     ),
     locations = cells_body(columns = variant_cols)
   ) %>%
-  gt_color_rows(
-    columns = variant_cols,
-    palette = c("#A90C38FF", "#FFFCFCFF", "#2E5A87FF"),
-    domain = c(0, 1)
-  ) %>%
   tab_options(
     table.border.top.style = "hidden",
     row_group.as_column = TRUE
   ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "bottom",
+      color = "#CCCCCC",
+      weight = px(3)
+    ),
+    locations = cells_body(rows = is_group_end)
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "top",
+      color = "#CCCCCC",
+      weight = px(3)
+    ),
+    locations = cells_body(rows = is_table_start)
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "bottom",
+      color = "#CCCCCC",
+      weight = px(3)
+    ),
+    locations = cells_row_groups()
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "top",
+      color = "#CCCCCC",
+      weight = px(3)
+    ),
+    locations = cells_row_groups()
+  ) %>%
+  cols_hide(c(is_group_end, is_table_start)) %>%
   sub_missing(columns = everything(), rows = everything(), missing_text = "")
 
 for (extension in c("html", "png", "docx")) {
