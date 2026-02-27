@@ -111,7 +111,29 @@ gt_table <- df %>%
   ) %>%
   tab_options(
     table.border.top.style = "hidden",
-    row_group.as_column = TRUE
+    row_group.as_column = TRUE,
+  ) %>%
+  # tab_style(
+  #   style = cell_borders(
+  #     sides = c("top", "right", "bottom", "left"),
+  #     color = "#D9D9D9",
+  #     weight = px(2)
+  #   ),
+  #   locations = cells_body()
+  # ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "right",
+      color = "#CCCCCC",
+      weight = px(3)
+    ),
+    locations = cells_body(columns = `n = 12`)
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(size = px(18), align = "center", v_align = "middle")
+    ),
+    locations = cells_row_groups()
   ) %>%
   tab_style(
     style = cell_borders(
@@ -131,15 +153,7 @@ gt_table <- df %>%
   ) %>%
   tab_style(
     style = cell_borders(
-      sides = "bottom",
-      color = "#CCCCCC",
-      weight = px(3)
-    ),
-    locations = cells_row_groups()
-  ) %>%
-  tab_style(
-    style = cell_borders(
-      sides = "top",
+      sides = c("top", "bottom", "left"),
       color = "#CCCCCC",
       weight = px(3)
     ),
