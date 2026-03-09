@@ -54,6 +54,7 @@ updown <- c(
 
 df <- read_csv("threes.csv") %>%
   select(c(`DrugBank:Main Name`, `Score`)) %>%
+  filter(!str_to_lower(`DrugBank:Main Name`) %in% c("nitroglycerin", "lidocaine", "tretinoin", "triamcinolone", "metformin", "azelaic acid")) %>%
   filter(`Score` >= 3) %>%
   left_join(select(all_ranked, c(`DrugBank:Main Name`, `search term`)), by = join_by(`DrugBank:Main Name`)) %>%
   mutate(`search term` = str_replace_all(`search term`, "[\\[\\]’‘']", "")) %>%
