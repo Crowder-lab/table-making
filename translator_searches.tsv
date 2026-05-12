@@ -1,0 +1,36 @@
+Patient symptoms	Evidence	Translator query	Removing anything not a drug
+Intellectual disability	Iwasawa 2019	What drugs may impact conditions related to intellectual disability	546
+Cerebral atrophy	Iwasawa 2019	What drugs may impact conditions related to cerebral atrophy	127
+Corpus callosum hypoplasia	Iwasawa 2019	What drugs may impact conditions related to hypoplasia of the corpus callosum	124
+Delayed myelination	Iwasawa 2019	What drugs may impact conditions related to delayed myelination	104
+Spastic diplegia	Iwasawa 2019	What drugs may impact conditions related to spastic diplegia	444
+Muscle hypotonia	Platzer 2019	What drugs may impact conditions related to hypotonia	30
+Autism	Platzer 2019	What drugs may impact conditions related to autism	700
+Movement disorder	Zhang 2025	What drugs may impact conditions related to movement disorder	769
+Ataxia	Platzer 2019	What drugs may impact conditions related to cerebellar ataxia	693
+Unstable gait	Platzer 2019	What drugs may impact conditions related to unsteady gait	121
+Spasticity	Platzer 2019	What drugs may impact conditions related to spasticity	174
+Dystonia	Zhang 2025	What drugs may impact conditions related to generalized dystonia	799
+Stiffness	Platzer 2019	What drugs may impact conditions related to muscle stiffness	47
+			
+Conditions Related to JIP3 Function			
+Neuroinflammation	Yang 2016	What drugs may impact conditions related to neuroinflammation	407
+Oxidative stress	Matsuura 2002	What drugs may impact conditions related to increased reactive oxygen species production	324
+Neurodevelopmental disorders	Platzer 2019	What drugs may impact conditions related to neurodevelopmental disorder	219
+Disorders of neurotransmitter transport	Choudhary 2017	What drugs may impact conditions related to inborn disorder of neurotransmitter metabolism and transport	419
+Neurodegenerative disease	Sato 2015	What drugs may impact conditions related to neurodegenerative disease	936
+Axonal neuropathy	Iwasawa 2019	What drugs may impact conditions related to axonal neuropathy	633
+			
+Hypothesized Compensatory Pathways			
+SPAG9	Gowrishankar 2021	What chemicals may increase the activity of SPAG9	758
+LRRK2	Gowrishankar 2021	What chemicals may decrease the activity of LRRK2	485
+CDK5	Klinman 2015	What chemicals may decrease the activity of CDK5	837
+ARF6	Montagnac 2009	What chemicals may increase the activity of ARF6	710
+MTOR	Moya-Alvarado 2023	What chemicals may decrease the activity of MTOR	170
+NTRK2	Huang 2011	What chemicals may increase the activity of NTRK2	784
+DRD1	Zhang 2025	What chemicals may increase the activity of DRD1	388
+DRD2	Zhang 2025	What chemicals may increase the activity of DRD2	110
+JNK	Drerup 2013	What chemicals may decrease the activity of MAPK8	846
+			
+			Total drugs (overestimate—drugs are counted for each search they appear in)
+			12704

@@ -3,8 +3,8 @@
 library(tidyverse)
 library(gt)
 
-raw <- read_csv(
-  "translator_searches.csv",
+raw <- read_tsv(
+  "translator_searches.tsv",
   col_names = FALSE,
   show_col_types = FALSE
 ) %>%
@@ -12,9 +12,7 @@ raw <- read_csv(
     "item",
     "source",
     "query",
-    "raw_hits",
-    "filtered_hits",
-    "extra"
+    "filtered_hits"
   ))
 
 # keep rows for the main table
@@ -24,8 +22,8 @@ main <- raw %>%
 
 # pull section titles explicitly
 section_map <- tibble(
-  row_id  = c(1, 16, 24),
-  section = main$item[c(1, 16, 24)]
+  row_id  = c(1, 15, 22),
+  section = main$item[c(1, 15, 22)]
 )
 
 # attach section labels and remove header rows
@@ -39,12 +37,12 @@ main_grouped <- main %>%
 
 # make pretty table
 gt_table <- main_grouped %>%
-  select(c(item, `source`, query, filtered_hits)) %>%
+  select(c(item, `source`, filtered_hits)) %>%
   gt() %>%
   cols_label(
     item = "",
     `source` = md("**Source**"),
-    query = md("**Query**"),
+    # query = md("**Query**"),
     filtered_hits = md("**Hits**")
   ) %>%
   tab_style(
